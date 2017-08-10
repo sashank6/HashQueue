@@ -1,0 +1,11 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/Exec.dir/main.cpp.o"
+  "CMakeFiles/Exec.dir/HashQueue.cpp.o"
+  "Exec.pdb"
+  "Exec"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/Exec.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
