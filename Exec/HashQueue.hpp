@@ -19,9 +19,13 @@ private:
     Node<T> *create_node(T element);
     void push_to_list(T element);
 
+
 public:
     HashQueue(unsigned long num_buckets = 100, unsigned long bucket_size = -1);
     void push(T element);
+    T top();
+    void pop();
+    bool is_empty();
     //Only for debugging
     void display_list();
 
@@ -46,6 +50,10 @@ void HashQueue<T>::push_to_list(T element) {
     this->list_tail = node;
 }
 
+template<class T>
+bool HashQueue::is_empty() {
+    return !(this->list_head);
+}
 
 template<class T>
 HashQueue<T>::HashQueue(unsigned long num_buckets, unsigned long bucket_size) {
@@ -75,4 +83,18 @@ void HashQueue<T>::display_list() {
     }
 }
 
+template<class T>
+T HashQueue::top() {
+    if (is_empty()) {
+        //throw Exception;
+    }
+    return this->list_head->data;
+}
+
+template<class T>
+void HashQueue::pop() {
+    if (is_empty()) {
+        //throw Exception
+    }
+}
 #endif //EXEC_HASHQUEUE_H
