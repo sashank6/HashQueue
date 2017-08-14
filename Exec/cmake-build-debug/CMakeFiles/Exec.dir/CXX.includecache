@@ -6,17 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/Users/sashankalladi/Github/HashQueue/Exec/HashQueue.cpp
-HashQueue.h
-/Users/sashankalladi/Github/HashQueue/Exec/HashQueue.h
-Node.h
-/Users/sashankalladi/Github/HashQueue/Exec/Node.h
+/Users/sashankalladi/Github/HashQueue/Exec/HashQueue.hpp
+Node.hpp
+/Users/sashankalladi/Github/HashQueue/Exec/Node.hpp
 
-/Users/sashankalladi/Github/HashQueue/Exec/HashQueue.h
-
-/Users/sashankalladi/Github/HashQueue/Exec/Node.h
+/Users/sashankalladi/Github/HashQueue/Exec/Node.hpp
 
 /Users/sashankalladi/Github/HashQueue/Exec/main.cpp
 iostream
 -
+HashQueue.hpp
+/Users/sashankalladi/Github/HashQueue/Exec/HashQueue.hpp
 

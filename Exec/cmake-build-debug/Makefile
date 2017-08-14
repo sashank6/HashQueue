@@ -123,33 +123,6 @@ Exec/fast:
 	$(MAKE) -f CMakeFiles/Exec.dir/build.make CMakeFiles/Exec.dir/build
 .PHONY : Exec/fast
 
-HashQueue.o: HashQueue.cpp.o
-
-.PHONY : HashQueue.o
-
-# target to build an object file
-HashQueue.cpp.o:
-	$(MAKE) -f CMakeFiles/Exec.dir/build.make CMakeFiles/Exec.dir/HashQueue.cpp.o
-.PHONY : HashQueue.cpp.o
-
-HashQueue.i: HashQueue.cpp.i
-
-.PHONY : HashQueue.i
-
-# target to preprocess a source file
-HashQueue.cpp.i:
-	$(MAKE) -f CMakeFiles/Exec.dir/build.make CMakeFiles/Exec.dir/HashQueue.cpp.i
-.PHONY : HashQueue.cpp.i
-
-HashQueue.s: HashQueue.cpp.s
-
-.PHONY : HashQueue.s
-
-# target to generate assembly for a file
-HashQueue.cpp.s:
-	$(MAKE) -f CMakeFiles/Exec.dir/build.make CMakeFiles/Exec.dir/HashQueue.cpp.s
-.PHONY : HashQueue.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -186,9 +159,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Exec"
-	@echo "... HashQueue.o"
-	@echo "... HashQueue.i"
-	@echo "... HashQueue.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

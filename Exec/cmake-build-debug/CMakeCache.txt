@@ -192,6 +192,9 @@ Exec_BINARY_DIR:STATIC=/Users/sashankalladi/Github/HashQueue/Exec/cmake-build-de
 //Value Computed by CMake
 Exec_SOURCE_DIR:STATIC=/Users/sashankalladi/Github/HashQueue/Exec
 
+//Path to a library.
+LIBSTDCXX:FILEPATH=/usr/lib/libstdc++.dylib
+
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
 
