@@ -4,7 +4,7 @@
 
 int main() {
 
-    HashQueue<int> hq(100,-1);
+    HashQueue<int> hq;
     hq.push(1);
     hq.push(2);
     hq.push(3);

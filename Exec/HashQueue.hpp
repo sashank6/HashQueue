@@ -21,7 +21,7 @@ private:
 
 
 public:
-    HashQueue(unsigned long num_buckets = 100, unsigned long bucket_size = -1);
+    HashQueue(unsigned long num_buckets = 100, long bucket_size = -1);
     void push(T element);
     T top();
     void pop();
@@ -51,18 +51,18 @@ void HashQueue<T>::push_to_list(T element) {
 }
 
 template<class T>
-bool HashQueue::is_empty() {
+bool HashQueue<T>::is_empty() {
     return !(this->list_head);
 }
 
 template<class T>
-HashQueue<T>::HashQueue(unsigned long num_buckets, unsigned long bucket_size) {
-//    this->bucket_size = bucket_size;
-//    this->num_buckets = num_buckets;
-//    this->hash_queue_heads = new Node<T> *[bucket_size];
-//    this->hash_queue_tails = new Node<T> *[bucket_size];
-//    memset(hash_queue_heads, 0, 100);
-//    memset(hash_queue_tails, 0, 100);
+HashQueue<T>::HashQueue(unsigned long num_buckets, long bucket_size) {
+    this->bucket_size = bucket_size;
+    this->num_buckets = num_buckets;
+    this->hash_queue_heads = new Node<T> *[this->num_buckets];
+    this->hash_queue_tails = new Node<T> *[this->num_buckets];
+    memset(hash_queue_heads, 0, this->num_buckets);
+    memset(hash_queue_tails, 0, this->num_buckets);
     this->list_head = 0;
     this->list_tail = 0;
 }
@@ -84,7 +84,7 @@ void HashQueue<T>::display_list() {
 }
 
 template<class T>
-T HashQueue::top() {
+T HashQueue<T>::top() {
     if (is_empty()) {
         //throw Exception;
     }
@@ -92,7 +92,7 @@ T HashQueue::top() {
 }
 
 template<class T>
-void HashQueue::pop() {
+void HashQueue<T>::pop() {
     if (is_empty()) {
         //throw Exception
     }
