@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/hqtests.dir/hqtest.cpp.o  -o hqtests ../googletest-build/googlemock/gtest/libgtest_main.a ../googletest-build/googlemock/libgmock_main.a ../googletest-build/googlemock/gtest/libgtest.a 
