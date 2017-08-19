@@ -1,1 +1,15 @@
 cmake-build-debug/**/*
+tests/CMakeFiles/**/*
+tests/googletest-build/**/*
+tests/googletest-download/**/*
+tests/googletest-src/**/*
+tests/gmock*
+tests/Makefile
+tests/CMakeCache.txt
+tests/cmake_install.cmake
+tests/gtest.pc
+tests/gtest_main.pc
+src/CMakeFiles/**/*
+src/Makefile
+src/CMakeCache.txt
+src/cmake_install.cmake
