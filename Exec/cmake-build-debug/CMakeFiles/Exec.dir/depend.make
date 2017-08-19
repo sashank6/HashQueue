@@ -3,5 +3,6 @@
 
 CMakeFiles/Exec.dir/main.cpp.o: ../HashQueue.hpp
 CMakeFiles/Exec.dir/main.cpp.o: ../Node.hpp
+CMakeFiles/Exec.dir/main.cpp.o: ../hashqueue_exceptions.hpp
 CMakeFiles/Exec.dir/main.cpp.o: ../main.cpp
 

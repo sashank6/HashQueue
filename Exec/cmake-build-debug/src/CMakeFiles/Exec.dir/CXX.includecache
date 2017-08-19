@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/sashankalladi/Github/HashQueue/Exec/src/HashQueue.hpp
+Node.hpp
+/Users/sashankalladi/Github/HashQueue/Exec/src/Node.hpp
+hashqueue_exceptions.hpp
+/Users/sashankalladi/Github/HashQueue/Exec/src/hashqueue_exceptions.hpp
+
+/Users/sashankalladi/Github/HashQueue/Exec/src/Node.hpp
+
+/Users/sashankalladi/Github/HashQueue/Exec/src/hashqueue_exceptions.hpp
+exception
+-
+
+/Users/sashankalladi/Github/HashQueue/Exec/src/main.cpp
+iostream
+-
+HashQueue.hpp
+/Users/sashankalladi/Github/HashQueue/Exec/src/HashQueue.hpp
+

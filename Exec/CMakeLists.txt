@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 project(Exec)
-set(CMAKE_CXX_STANDARD 11)
-set(SOURCE_FILES main.cpp HashQueue.hpp Node.hpp)
-add_executable(Exec ${SOURCE_FILES})
+add_subdirectory(src)
+add_subdirectory(tests)
+
+

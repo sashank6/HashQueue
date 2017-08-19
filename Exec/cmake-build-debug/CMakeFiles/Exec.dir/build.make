@@ -57,38 +57,38 @@ include CMakeFiles/Exec.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Exec.dir/flags.make
 
-CMakeFiles/Exec.dir/main.cpp.o: CMakeFiles/Exec.dir/flags.make
-CMakeFiles/Exec.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/sashankalladi/Github/HashQueue/Exec/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Exec.dir/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Exec.dir/main.cpp.o -c /Users/sashankalladi/Github/HashQueue/Exec/main.cpp
+CMakeFiles/Exec.dir/src/main.cpp.o: CMakeFiles/Exec.dir/flags.make
+CMakeFiles/Exec.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/sashankalladi/Github/HashQueue/Exec/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Exec.dir/src/main.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Exec.dir/src/main.cpp.o -c /Users/sashankalladi/Github/HashQueue/Exec/src/main.cpp
 
-CMakeFiles/Exec.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Exec.dir/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/sashankalladi/Github/HashQueue/Exec/main.cpp > CMakeFiles/Exec.dir/main.cpp.i
+CMakeFiles/Exec.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Exec.dir/src/main.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/sashankalladi/Github/HashQueue/Exec/src/main.cpp > CMakeFiles/Exec.dir/src/main.cpp.i
 
-CMakeFiles/Exec.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Exec.dir/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sashankalladi/Github/HashQueue/Exec/main.cpp -o CMakeFiles/Exec.dir/main.cpp.s
+CMakeFiles/Exec.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Exec.dir/src/main.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sashankalladi/Github/HashQueue/Exec/src/main.cpp -o CMakeFiles/Exec.dir/src/main.cpp.s
 
-CMakeFiles/Exec.dir/main.cpp.o.requires:
+CMakeFiles/Exec.dir/src/main.cpp.o.requires:
 
-.PHONY : CMakeFiles/Exec.dir/main.cpp.o.requires
+.PHONY : CMakeFiles/Exec.dir/src/main.cpp.o.requires
 
-CMakeFiles/Exec.dir/main.cpp.o.provides: CMakeFiles/Exec.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Exec.dir/build.make CMakeFiles/Exec.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/Exec.dir/main.cpp.o.provides
+CMakeFiles/Exec.dir/src/main.cpp.o.provides: CMakeFiles/Exec.dir/src/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Exec.dir/build.make CMakeFiles/Exec.dir/src/main.cpp.o.provides.build
+.PHONY : CMakeFiles/Exec.dir/src/main.cpp.o.provides
 
-CMakeFiles/Exec.dir/main.cpp.o.provides.build: CMakeFiles/Exec.dir/main.cpp.o
+CMakeFiles/Exec.dir/src/main.cpp.o.provides.build: CMakeFiles/Exec.dir/src/main.cpp.o
 
 
 # Object files for target Exec
 Exec_OBJECTS = \
-"CMakeFiles/Exec.dir/main.cpp.o"
+"CMakeFiles/Exec.dir/src/main.cpp.o"
 
 # External object files for target Exec
 Exec_EXTERNAL_OBJECTS =
 
-Exec: CMakeFiles/Exec.dir/main.cpp.o
+Exec: CMakeFiles/Exec.dir/src/main.cpp.o
 Exec: CMakeFiles/Exec.dir/build.make
 Exec: CMakeFiles/Exec.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/sashankalladi/Github/HashQueue/Exec/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Exec"
@@ -99,7 +99,7 @@ CMakeFiles/Exec.dir/build: Exec
 
 .PHONY : CMakeFiles/Exec.dir/build
 
-CMakeFiles/Exec.dir/requires: CMakeFiles/Exec.dir/main.cpp.o.requires
+CMakeFiles/Exec.dir/requires: CMakeFiles/Exec.dir/src/main.cpp.o.requires
 
 .PHONY : CMakeFiles/Exec.dir/requires
 

@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Exec.dir/main.cpp.o"
+  "CMakeFiles/Exec.dir/src/main.cpp.o"
   "Exec.pdb"
   "Exec"
 )

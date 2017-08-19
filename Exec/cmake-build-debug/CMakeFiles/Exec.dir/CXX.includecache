@@ -9,8 +9,14 @@
 /Users/sashankalladi/Github/HashQueue/Exec/HashQueue.hpp
 Node.hpp
 /Users/sashankalladi/Github/HashQueue/Exec/Node.hpp
+hashqueue_exceptions.hpp
+/Users/sashankalladi/Github/HashQueue/Exec/hashqueue_exceptions.hpp
 
 /Users/sashankalladi/Github/HashQueue/Exec/Node.hpp
+
+/Users/sashankalladi/Github/HashQueue/Exec/hashqueue_exceptions.hpp
+exception
+-
 
 /Users/sashankalladi/Github/HashQueue/Exec/main.cpp
 iostream
