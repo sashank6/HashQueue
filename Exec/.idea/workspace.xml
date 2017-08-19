@@ -3,11 +3,6 @@
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
       <config projectName="Exec" targetName="gmock" />
-      <config projectName="Exec" targetName="Exec" />
-      <config projectName="Exec" targetName="gmock_main" />
-      <config projectName="Exec" targetName="hqtests" />
-      <config projectName="Exec" targetName="gtest_main" />
-      <config projectName="Exec" targetName="gtest" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -17,7 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2eb574ac-c624-4b96-9e4b-11f122f984a6" name="Default" comment="" />
-    <ignored path="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/" />
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/tests/hqtest.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+              <caret line="20" column="27" lean-forward="false" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
               <folding>
                 <element signature="e#1#21#0" expanded="true" />
                 <marker date="1503120372000" expanded="true" signature="134:373" ph="{...}" />
@@ -97,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/src/HashQueue.hpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="603">
-              <caret line="176" column="0" lean-forward="true" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+              <caret line="176" column="0" lean-forward="false" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
               <folding>
                 <element signature="e#53#72#0" expanded="true" />
                 <element signature="e#157#166#0" expanded="true" />
@@ -239,9 +234,6 @@
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
       <envs />
     </configuration>
-    <configuration name="Exec" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Exec" TARGET_NAME="Exec" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Exec" RUN_TARGET_NAME="Exec">
-      <envs />
-    </configuration>
     <configuration name="GTest" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Exec" TARGET_NAME="Exec" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Exec" RUN_TARGET_NAME="Exec" TEST_MODE="SUITE_TEST">
       <envs />
     </configuration>
@@ -265,37 +257,20 @@
     <configuration name="gmock" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Exec" TARGET_NAME="Exec" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Exec" RUN_TARGET_NAME="Exec">
       <envs />
     </configuration>
-    <configuration name="gmock_main" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Exec" TARGET_NAME="gmock_main" CONFIG_NAME="Debug">
-      <envs />
-    </configuration>
-    <configuration name="gtest" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Exec" TARGET_NAME="gtest" CONFIG_NAME="Debug">
-      <envs />
-    </configuration>
-    <configuration name="gtest_main" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Exec" TARGET_NAME="gtest_main" CONFIG_NAME="Debug">
-      <envs />
-    </configuration>
     <configuration name="hashqueue.push_test" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Exec" TARGET_NAME="hqtests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Exec" RUN_TARGET_NAME="hqtests" TEST_CLASS="hashqueue" TEST_METHOD="push_test" TEST_MODE="SUITE_TEST">
       <envs />
     </configuration>
     <configuration name="hashqueue.push_test_list" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Exec" TARGET_NAME="hqtests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Exec" RUN_TARGET_NAME="hqtests" TEST_CLASS="hashqueue" TEST_METHOD="push_test_list" TEST_MODE="SUITE_TEST">
       <envs />
     </configuration>
-    <configuration name="hqtests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Exec" TARGET_NAME="hqtests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Exec" RUN_TARGET_NAME="hqtests" TEST_MODE="SUITE_TEST">
-      <envs />
-    </configuration>
-    <list size="12">
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
       <item index="1" class="java.lang.String" itemvalue="Application.gmock" />
-      <item index="2" class="java.lang.String" itemvalue="Application.gmock_main" />
-      <item index="3" class="java.lang.String" itemvalue="Application.gtest" />
-      <item index="4" class="java.lang.String" itemvalue="Application.gtest_main" />
-      <item index="5" class="java.lang.String" itemvalue="Application.Exec" />
-      <item index="6" class="java.lang.String" itemvalue="Google Test.hqtests" />
-      <item index="7" class="java.lang.String" itemvalue="Google Test.GTest" />
-      <item index="8" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
-      <item index="9" class="java.lang.String" itemvalue="Google Test.cpp_sorter_test.null_term_str_sort" />
-      <item index="10" class="java.lang.String" itemvalue="Google Test.hashqueue.push_test_list" />
-      <item index="11" class="java.lang.String" itemvalue="Google Test.hashqueue.push_test" />
+      <item index="2" class="java.lang.String" itemvalue="Google Test.GTest" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
+      <item index="4" class="java.lang.String" itemvalue="Google Test.cpp_sorter_test.null_term_str_sort" />
+      <item index="5" class="java.lang.String" itemvalue="Google Test.hashqueue.push_test_list" />
+      <item index="6" class="java.lang.String" itemvalue="Google Test.hashqueue.push_test" />
     </list>
     <recent_temporary>
       <list size="4">
@@ -317,7 +292,7 @@
       <option name="presentableId" value="Default" />
       <updated>1502363995241</updated>
       <workItem from="1502363998987" duration="4573000" />
-      <workItem from="1502663668591" duration="16505000" />
+      <workItem from="1502663668591" duration="16590000" />
     </task>
     <servers />
   </component>
@@ -354,17 +329,17 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21078000" />
+    <option name="totallyTimeSpent" value="21163000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1361" y="22" width="1614" height="1053" extended-state="0" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925585" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925585" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32925585" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22222222" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22222222" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19516729" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -549,7 +524,7 @@
     <entry file="file://$PROJECT_DIR$/src/HashQueue.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="603">
-          <caret line="176" column="0" lean-forward="true" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+          <caret line="176" column="0" lean-forward="false" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
           <folding>
             <element signature="e#53#72#0" expanded="true" />
             <element signature="e#157#166#0" expanded="true" />
@@ -574,7 +549,7 @@
     <entry file="file://$PROJECT_DIR$/tests/hqtest.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <caret line="20" column="27" lean-forward="false" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
           <folding>
             <element signature="e#1#21#0" expanded="true" />
             <marker date="1503120372000" expanded="true" signature="134:373" ph="{...}" />
