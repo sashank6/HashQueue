@@ -24,12 +24,13 @@ private:
 
     Node<T> *create_node(T element);
     void push_to_queue(T element);
-    void push_to_list(Node<T> *node, Node<T>*& list_head, Node<T>*& list_tail);
+    void push_to_list(Node<T> *node, Node<T>*& head, Node<T>*& tail);
     void free_node(Node<T> *node);
     void update_head_next();
     void update_tail_prev();
     bool is_last_node();
     unsigned long int get_bucket_index(T element);
+    unsigned long int get_count(T element, Node<T> *bucket_head);
 
 
 
@@ -44,6 +45,7 @@ public:
     void display_list();
     unsigned long int size();
     std::vector<T> get_all_elements();
+    unsigned long int get_count(T element);
 
 };
 
@@ -121,6 +123,17 @@ unsigned long int HashQueue<T>::get_bucket_index(T element) {
 }
 
 template<class T>
+unsigned long int HashQueue<T>::get_count(T element, Node<T> *bucket_head) {
+
+    unsigned long int count = 0;
+    while(bucket_head) {
+        count+= (bucket_head->data == element);
+        bucket_head = bucket_head->next;
+    }
+    return count;
+}
+
+template<class T>
 HashQueue<T>::HashQueue(unsigned long num_buckets, long bucket_size) {
     this->bucket_size = bucket_size;
     this->num_buckets = num_buckets;
@@ -193,5 +206,11 @@ std::vector<T> HashQueue<T>::get_all_elements() {
     }
 
     return all_elements;
+}
+
+template<class T>
+unsigned long int HashQueue<T>::get_count(T element) {
+    unsigned long int bucket_index = get_bucket_index(element);
+    return get_count(element, this->hash_queue_heads[bucket_index]);
 }
 #endif //EXEC_HASHQUEUE_H
