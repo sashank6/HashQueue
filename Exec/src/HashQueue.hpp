@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include<functional>
 #include "Node.hpp"
 #include "hashqueue_exceptions.hpp"
 
@@ -20,13 +21,16 @@ private:
     Node<T> *list_tail;
     unsigned long int length;
 
-    unsigned long get_bucket(T element);
+
     Node<T> *create_node(T element);
-    void push_to_list(T element);
+    void push_to_queue(T element);
+    void push_to_list(Node<T> *node, Node<T>*& list_head, Node<T>*& list_tail);
     void free_node(Node<T> *node);
     void update_head_next();
     void update_tail_prev();
     bool is_last_node();
+    unsigned long int get_bucket_index(T element);
+
 
 
 
@@ -50,16 +54,24 @@ Node<T>* HashQueue<T>::create_node(T data) {
 }
 
 template<class T>
-void HashQueue<T>::push_to_list(T element) {
-    Node<T> *node = create_node(element);
-    if(!(this->list_head)) {
-        this->list_head = node;
-        this->list_tail = node;
+void HashQueue<T>::push_to_list(Node<T> *node, Node<T>*& list_head, Node<T>*& list_tail) {
+
+    if(!(list_head)) {
+        list_head = node;
+        list_tail = node;
         return;
     }
-    node->prev = this->list_tail;
-    this->list_tail->next = node;
-    this->list_tail = node;
+    node->prev = list_tail;
+    list_tail->next = node;
+    list_tail = node;
+}
+
+template<class T>
+void HashQueue<T>::push_to_queue(T element) {
+    Node<T> *node = create_node(element);
+    push_to_list(node, this->list_head, this->list_tail);
+    unsigned long int bucket_index = get_bucket_index(element);
+    push_to_list(node, this->hash_queue_heads[bucket_index], this->hash_queue_tails[bucket_index]);
 }
 
 template<class T>
@@ -101,7 +113,12 @@ bool HashQueue<T>::is_last_node() {
     return (this->list_head->next == 0);
 }
 
-
+template<class T>
+unsigned long int HashQueue<T>::get_bucket_index(T element) {
+    std::hash<T> predefined_hash_algo;
+    size_t hash_value = predefined_hash_algo(element);
+    return (hash_value%this->num_buckets);
+}
 
 template<class T>
 HashQueue<T>::HashQueue(unsigned long num_buckets, long bucket_size) {
@@ -120,7 +137,7 @@ template<class T>
 void HashQueue<T>::push(T element) {
 
     this->length++;
-    push_to_list(element);
+    push_to_queue(element);
 }
 
 template<class T>
@@ -165,9 +182,9 @@ unsigned long HashQueue<T>::size() {
     return this->length;
 }
 
+//TODO: Performance improvement to be done.
 template<class T>
 std::vector<T> HashQueue<T>::get_all_elements() {
-    std::cout<<this->length<<std::endl;
     std::vector<T> all_elements;
     Node<T> *temp_node = this->list_head;
     while(temp_node != 0) {

@@ -4,10 +4,10 @@ using namespace std;
 
 int main() {
 
-    HashQueue<int> hq;
-    hq.push(1);
-    hq.push(2);
-    hq.push(3);
+    HashQueue<double> hq;
+    hq.push(1.5);
+    hq.push(2.5);
+    hq.push(3.5);
     hq.display_list();
     std::cout<<hq.top()<<std::endl;
     hq.display_list();

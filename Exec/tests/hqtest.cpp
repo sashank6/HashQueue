@@ -37,6 +37,7 @@ TEST(hashqueue, pop_test) {
     hq.pop();
     EXPECT_EQ(hq.size(), 0);
     EXPECT_EQ(hq.is_empty(), true);
+    hq_elements = hq.get_all_elements();
     ASSERT_THAT(hq_elements, testing::ElementsAre());
 
 }
