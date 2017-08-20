@@ -13,3 +13,4 @@ src/CMakeFiles/**/*
 src/Makefile
 src/CMakeCache.txt
 src/cmake_install.cmake
+.idea/workspace.xml

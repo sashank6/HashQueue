@@ -12,4 +12,11 @@ struct QueueEmptyException:public std::exception {
 
 };
 
+struct InvalidPushException:public std::exception {
+    const char* what() const throw() {
+        return "Cannot push null memory bad_alloc";
+    }
+
+};
+
 #endif //EXEC_EXCEPTIONS_H
