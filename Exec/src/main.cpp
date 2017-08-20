@@ -6,6 +6,7 @@ using namespace std;
 int main() {
 
     HashQueue<double> hq;
+    hq.push(0.9);
     hq.push(1.5);
     hq.push(2.5);
     hq.push(3.5);
