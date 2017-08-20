@@ -63,6 +63,8 @@ public:
 
     unsigned long int get_count(T element);
 
+    bool has_key(T element);
+
 };
 
 template<class T>
@@ -252,6 +254,12 @@ template<class T>
 unsigned long int HashQueue<T>::get_count(T element) {
     unsigned long int bucket_index = get_bucket_index(element);
     return get_count(element, this->hash_queue_heads[bucket_index]);
+}
+
+template<class T>
+bool HashQueue<T>::has_key(T element) {
+
+  return get_count(element) > 0;
 }
 
 #endif //EXEC_HASHQUEUE_H

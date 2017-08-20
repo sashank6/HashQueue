@@ -11,6 +11,8 @@ int main() {
     hq.push(3.5);
     hq.push(7.5);
     hq.push(3.5);
+    hq.push(8.5);
+    hq.push(9.5);
 
     hq.display_list();
     std::cout << hq.top() << std::endl;
