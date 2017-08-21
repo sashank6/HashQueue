@@ -9,6 +9,12 @@
 #include "Node.hpp"
 #include "hashqueue_exceptions.hpp"
 
+/*TODO:
+ * 1. Catching Segmentation fault and throwing informative exception to the user.
+ * 2. Performance optimization for get_all_elements* functions.
+*/
+
+
 template<class T, class Compare = std::equal_to<T> >
 class HashQueue {
 
@@ -22,9 +28,9 @@ private:
     unsigned long int length;
 
 
-    Node<T> *create_node(T element);
+    Node<T> *create_node(const T element);
 
-    void push_to_queue(T element);
+    void push_to_queue(const T element);
 
     void push_to_list(Node<T> *node, Node<T> *&head, Node<T> *&tail);
 
@@ -38,15 +44,17 @@ private:
 
     bool is_last_node();
 
-    unsigned long int get_bucket_index(T element);
+    unsigned long int get_bucket_index(const T element);
 
-    size_t get_count(T element, Node<T> *bucket_head);
+    size_t get_count(const T element, Node<T> *bucket_head);
+
+    std::vector<T> get_all_elements(const T element, Node<T> *bucket_head);
 
 
 public:
     HashQueue(unsigned long num_buckets = 100, long bucket_size = -1);
 
-    void push(T element);
+    void push(const T element);
 
     T top();
 
@@ -61,15 +69,17 @@ public:
 
     std::vector<T> get_all_elements();
 
-    unsigned long int get_count(T element);
+    unsigned long int get_count(const T element);
 
-    bool has_key(T element);
+    bool has_key(const T element);
+
+    std::vector<T> get_all_elements(const T element);
 
 
 };
 
 template<class T, class Compare>
-Node<T> *HashQueue<T, Compare>::create_node(T data) {
+Node<T> *HashQueue<T, Compare>::create_node(const T data) {
     Node<T> *node = new Node<T>(data);
     return node;
 }
@@ -111,7 +121,7 @@ void HashQueue<T, Compare>::push_to_hash_queue(Node<T> *node, Node<T> *&list_hea
 
 
 template<class T, class Compare>
-void HashQueue<T, Compare>::push_to_queue(T element) {
+void HashQueue<T, Compare>::push_to_queue(const T element) {
     Node<T> *node = create_node(element);
     push_to_list(node, this->list_head, this->list_tail);
     unsigned long int bucket_index = get_bucket_index(element);
@@ -158,14 +168,14 @@ bool HashQueue<T, Compare>::is_last_node() {
 }
 
 template<class T, class Compare>
-unsigned long int HashQueue<T, Compare>::get_bucket_index(T element) {
+unsigned long int HashQueue<T, Compare>::get_bucket_index(const T element) {
     std::hash<T> predefined_hash_algo;
     size_t hash_value = predefined_hash_algo(element);
     return (hash_value % this->num_buckets);
 }
 
 template<class T, class Compare>
-size_t HashQueue<T, Compare>::get_count(T element, Node<T> *bucket_head) {
+size_t HashQueue<T, Compare>::get_count(const T element, Node<T> *bucket_head) {
 
     size_t count = 0;
     Node<T> *bucket_node = bucket_head;
@@ -175,6 +185,23 @@ size_t HashQueue<T, Compare>::get_count(T element, Node<T> *bucket_head) {
     }
     return count;
 }
+
+/*
+ * Used for fetching elements similar to specified element in a specific bucket.
+ */
+template<class T, class Compare>
+std::vector<T> HashQueue<T,Compare> :: get_all_elements(const T element, Node<T> *bucket_head) {
+
+    Node<T> *bucket_node = bucket_head;
+    std::vector<T> all_elements;
+    while(bucket_node) {
+        if (Compare()(bucket_node->data, element)) {
+            all_elements.push_back(bucket_node->data);
+        }
+        bucket_node = bucket_node->next_hash;
+    }
+    return all_elements;
+};
 
 template<class T, class Compare>
 HashQueue<T, Compare>::HashQueue(unsigned long num_buckets, long bucket_size) {
@@ -190,7 +217,7 @@ HashQueue<T, Compare>::HashQueue(unsigned long num_buckets, long bucket_size) {
 }
 
 template<class T, class Compare>
-void HashQueue<T, Compare>::push(T element) {
+void HashQueue<T, Compare>::push(const T element) {
 
     this->length++;
     push_to_queue(element);
@@ -252,7 +279,7 @@ std::vector<T> HashQueue<T, Compare>::get_all_elements() {
 }
 
 template<class T, class Compare>
-unsigned long int HashQueue<T, Compare>::get_count(T element) {
+unsigned long int HashQueue<T, Compare>::get_count(const T element) {
     unsigned long int bucket_index = get_bucket_index(element);
     return get_count(element, this->hash_queue_heads[bucket_index]);
 }
@@ -261,6 +288,16 @@ template<class T, class Compare>
 bool HashQueue<T, Compare>::has_key(T element) {
 
   return get_count(element) > 0;
+}
+
+/*
+ * Fetch all the elements that are equal when compared with specified element
+ */
+
+template<class T, class Compare>
+std::vector<T> HashQueue<T,Compare>::get_all_elements(const T element) {
+    size_t bucket_index = get_bucket_index(element);
+    return get_all_elements(element, this->hash_queue_heads[bucket_index]);
 }
 
 #endif //EXEC_HASHQUEUE_H
