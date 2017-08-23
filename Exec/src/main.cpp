@@ -25,7 +25,11 @@ int main() {
     while (!hq.is_empty()) {
         hq.pop();
     }
+    std::vector<double> v = hq.get_all_elements(3.5);
+    std::cout<<v.size()<<std::endl;
 
+    for(int i=0;i<v.size();i++)
+      std::cout<<v[i]<<std::endl;
 
     hq.display_list();
 

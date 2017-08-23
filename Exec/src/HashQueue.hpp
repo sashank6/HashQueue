@@ -12,29 +12,29 @@
 /*TODO:
  * 1. Catching Segmentation fault and throwing informative exception to the user.
  * 2. Performance optimization for get_all_elements* functions.
+ * 3. Figure out pointer memory allocation  and use inbuilt function to reset memory
 */
 
 
-template<class T, class Compare = std::equal_to<T> >
+template<class T, class Compare = std::equal_to<T>, class Hash = std::hash<T> >
 class HashQueue {
 
 private:
     unsigned long num_buckets;
     long bucket_size;
-    Node<T> **hash_queue_heads;
-    Node<T> **hash_queue_tails;
+    Node<T> *hash_queue_heads[100];
+    Node<T> *hash_queue_tails[100];
     Node<T> *list_head;
     Node<T> *list_tail;
     unsigned long int length;
-
 
     Node<T> *create_node(const T element);
 
     void push_to_queue(const T element);
 
-    void push_to_list(Node<T> *node, Node<T> *&head, Node<T> *&tail);
+    void push_to_list(Node<T> *&node);
 
-    void push_to_hash_queue(Node<T> *node, Node<T> *&head, Node<T> *&tail);
+    void push_to_hash_queue(Node<T> *&node, size_t bucket_index);
 
     void free_node(Node<T> *node);
 
@@ -48,7 +48,7 @@ private:
 
     size_t get_count(const T element, Node<T> *bucket_head);
 
-    std::vector<T> get_all_elements(const T element, Node<T> *bucket_head);
+    std::vector<T> get_all_elements(const T element, size_t bucket_index);
 
 
 public:
@@ -78,68 +78,69 @@ public:
 
 };
 
-template<class T, class Compare>
-Node<T> *HashQueue<T, Compare>::create_node(const T data) {
+template<class T, class Compare, class Hash>
+Node<T> *HashQueue<T, Compare, Hash>::create_node(const T data) {
     Node<T> *node = new Node<T>(data);
     return node;
 }
 
-template<class T, class Compare>
-void HashQueue<T, Compare>::push_to_list(Node<T> *node, Node<T> *&list_head, Node<T> *&list_tail) {
+template<class T, class Compare, class Hash>
+void HashQueue<T, Compare, Hash>::push_to_list(Node<T> *&node) {
 
     if (!node) {
         throw new InvalidPushException();
     }
 
-    if (!(list_head)) {
-        list_head = node;
-        list_tail = node;
+    if (!(this->list_head)) {
+        this->list_head = node;
+        this->list_tail = node;
         return;
     }
-    node->prev = list_tail;
-    list_tail->next = node;
-    list_tail = node;
+    node->prev = this->list_tail;
+    this->list_tail->next = node;
+    this->list_tail = node;
 }
 
-template<class T, class Compare>
-void HashQueue<T, Compare>::push_to_hash_queue(Node<T> *node, Node<T> *&list_head, Node<T> *&list_tail) {
+template<class T, class Compare, class Hash>
+void HashQueue<T, Compare, Hash>::push_to_hash_queue(Node<T> *&node, size_t bucket_index) {
 
+    std::cout<<this->hash_queue_heads[bucket_index]<<std::endl;
     if (!node) {
         throw new InvalidPushException();
     }
 
-    if (!(list_head)) {
-        list_head = node;
-        list_tail = node;
+    if (!(this->hash_queue_heads[bucket_index])) {
+        this->hash_queue_heads[bucket_index] = node;
+        this->hash_queue_tails[bucket_index] = node;
         return;
     }
-    node->prev_hash = list_tail;
-    list_tail->next_hash = node;
-    list_tail = node;
+    node->prev_hash = this->hash_queue_tails[bucket_index];
+    this->hash_queue_tails[bucket_index]->next_hash = node;
+    this->hash_queue_tails[bucket_index] = node;
 
 }
 
 
-template<class T, class Compare>
-void HashQueue<T, Compare>::push_to_queue(const T element) {
+template<class T, class Compare, class Hash>
+void HashQueue<T, Compare, Hash>::push_to_queue(const T element) {
     Node<T> *node = create_node(element);
-    push_to_list(node, this->list_head, this->list_tail);
-    unsigned long int bucket_index = get_bucket_index(element);
-    push_to_hash_queue(node, this->hash_queue_heads[bucket_index], this->hash_queue_tails[bucket_index]);
+    push_to_list(node);
+    size_t bucket_index = get_bucket_index(element);
+    push_to_hash_queue(node, bucket_index);
 }
 
-template<class T, class Compare>
-bool HashQueue<T, Compare>::is_empty() {
+template<class T, class Compare, class Hash>
+bool HashQueue<T, Compare, Hash>::is_empty() {
     return !(this->list_head);
 }
 
-template<class T, class Compare>
-void HashQueue<T, Compare>::free_node(Node<T> *node) {
+template<class T, class Compare, class Hash>
+void HashQueue<T, Compare, Hash>::free_node(Node<T> *node) {
     delete node;
 }
 
-template<class T, class Compare>
-void HashQueue<T, Compare>::update_head_next() {
+template<class T, class Compare, class Hash>
+void HashQueue<T, Compare, Hash>::update_head_next() {
     if (is_empty()) {
         return;
     }
@@ -148,8 +149,8 @@ void HashQueue<T, Compare>::update_head_next() {
     this->list_head = next_head;
 }
 
-template<class T, class Compare>
-void HashQueue<T, Compare>::update_tail_prev() {
+template<class T, class Compare, class Hash>
+void HashQueue<T, Compare, Hash>::update_tail_prev() {
     if (is_empty()) {
         this->list_tail = 0;
         return;
@@ -159,23 +160,23 @@ void HashQueue<T, Compare>::update_tail_prev() {
     this->list_tail = prev_node;
 }
 
-template<class T, class Compare>
-bool HashQueue<T, Compare>::is_last_node() {
+template<class T, class Compare, class Hash>
+bool HashQueue<T, Compare, Hash>::is_last_node() {
     if (is_empty()) {
         return false;
     }
     return (this->list_head->next == 0);
 }
 
-template<class T, class Compare>
-unsigned long int HashQueue<T, Compare>::get_bucket_index(const T element) {
-    std::hash<T> predefined_hash_algo;
-    size_t hash_value = predefined_hash_algo(element);
+template<class T, class Compare, class Hash>
+unsigned long int HashQueue<T, Compare, Hash>::get_bucket_index(const T element) {
+    std::hash<T> pdf;
+    size_t hash_value = pdf(element);
     return (hash_value % this->num_buckets);
 }
 
-template<class T, class Compare>
-size_t HashQueue<T, Compare>::get_count(const T element, Node<T> *bucket_head) {
+template<class T, class Compare, class Hash>
+size_t HashQueue<T, Compare, Hash>::get_count(const T element, Node<T> *bucket_head) {
 
     size_t count = 0;
     Node<T> *bucket_node = bucket_head;
@@ -189,10 +190,13 @@ size_t HashQueue<T, Compare>::get_count(const T element, Node<T> *bucket_head) {
 /*
  * Used for fetching elements similar to specified element in a specific bucket.
  */
-template<class T, class Compare>
-std::vector<T> HashQueue<T,Compare> :: get_all_elements(const T element, Node<T> *bucket_head) {
+template<class T, class Compare, class Hash>
+std::vector<T> HashQueue<T, Compare, Hash> :: get_all_elements(const T element, size_t bucket_index) {
 
-    Node<T> *bucket_node = bucket_head;
+    Node<T> *bucket_node = this->hash_queue_heads[bucket_index];
+    std::cout<<bucket_node<<std::endl;
+    std::cout<<bucket_node->data<<std::endl;
+    std::cout<<bucket_node->next_hash->data<<std::endl;
     std::vector<T> all_elements;
     while(bucket_node) {
         if (Compare()(bucket_node->data, element)) {
@@ -203,28 +207,31 @@ std::vector<T> HashQueue<T,Compare> :: get_all_elements(const T element, Node<T>
     return all_elements;
 };
 
-template<class T, class Compare>
-HashQueue<T, Compare>::HashQueue(unsigned long num_buckets, long bucket_size) {
+//TODO: Pointer memory allocation
+template<class T, class Compare, class Hash>
+HashQueue<T, Compare, Hash>::HashQueue(unsigned long num_buckets, long bucket_size) {
     this->bucket_size = bucket_size;
     this->num_buckets = num_buckets;
-    this->hash_queue_heads = new Node<T> *[this->num_buckets];
-    this->hash_queue_tails = new Node<T> *[this->num_buckets];
-    memset(hash_queue_heads, 0, this->num_buckets);
-    memset(hash_queue_tails, 0, this->num_buckets);
+    Node<T> *p[this->num_buckets];
+    for(int i = 0;i<this->num_buckets;i++) {
+        this->hash_queue_heads[i] = 0;
+        this->hash_queue_tails[i] = 0;
+    }
+
     this->list_head = 0;
     this->list_tail = 0;
     this->length = 0;
 }
 
-template<class T, class Compare>
-void HashQueue<T, Compare>::push(const T element) {
+template<class T, class Compare, class Hash>
+void HashQueue<T, Compare, Hash>::push(const T element) {
 
     this->length++;
     push_to_queue(element);
 }
 
-template<class T, class Compare>
-void HashQueue<T, Compare>::display_list() {
+template<class T, class Compare, class Hash>
+void HashQueue<T, Compare, Hash>::display_list() {
 
     if (is_empty()) {
         return;
@@ -237,16 +244,16 @@ void HashQueue<T, Compare>::display_list() {
     std::cout << std::endl;
 }
 
-template<class T, class Compare>
-T HashQueue<T, Compare>::top() {
+template<class T, class Compare, class Hash>
+T HashQueue<T, Compare, Hash>::top() {
     if (is_empty()) {
         throw QueueEmptyException();
     }
     return this->list_head->data;
 }
 
-template<class T, class Compare>
-void HashQueue<T, Compare>::pop() {
+template<class T, class Compare, class Hash>
+void HashQueue<T, Compare, Hash>::pop() {
     if (is_empty()) {
         throw QueueEmptyException();
     }
@@ -260,14 +267,14 @@ void HashQueue<T, Compare>::pop() {
     this->length--;
 }
 
-template<class T, class Compare>
-unsigned long HashQueue<T, Compare>::size() {
+template<class T, class Compare, class Hash>
+unsigned long HashQueue<T, Compare, Hash>::size() {
     return this->length;
 }
 
 //TODO: Performance improvement to be done.
-template<class T, class Compare>
-std::vector<T> HashQueue<T, Compare>::get_all_elements() {
+template<class T, class Compare, class Hash>
+std::vector<T> HashQueue<T, Compare, Hash>::get_all_elements() {
     std::vector<T> all_elements;
     Node<T> *temp_node = this->list_head;
     while (temp_node != 0) {
@@ -278,14 +285,14 @@ std::vector<T> HashQueue<T, Compare>::get_all_elements() {
     return all_elements;
 }
 
-template<class T, class Compare>
-unsigned long int HashQueue<T, Compare>::get_count(const T element) {
+template<class T, class Compare, class Hash>
+unsigned long int HashQueue<T, Compare, Hash>::get_count(const T element) {
     unsigned long int bucket_index = get_bucket_index(element);
     return get_count(element, this->hash_queue_heads[bucket_index]);
 }
 
-template<class T, class Compare>
-bool HashQueue<T, Compare>::has_key(T element) {
+template<class T, class Compare, class Hash>
+bool HashQueue<T, Compare, Hash>::has_key(T element) {
 
   return get_count(element) > 0;
 }
@@ -294,10 +301,11 @@ bool HashQueue<T, Compare>::has_key(T element) {
  * Fetch all the elements that are equal when compared with specified element
  */
 
-template<class T, class Compare>
-std::vector<T> HashQueue<T,Compare>::get_all_elements(const T element) {
+template<class T, class Compare, class Hash>
+std::vector<T> HashQueue<T,Compare, Hash>::get_all_elements(const T element) {
     size_t bucket_index = get_bucket_index(element);
-    return get_all_elements(element, this->hash_queue_heads[bucket_index]);
+    std::cout<<bucket_index<<std::endl;
+    return get_all_elements(element, bucket_index);
 }
 
 #endif //EXEC_HASHQUEUE_H
