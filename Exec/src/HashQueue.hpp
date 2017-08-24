@@ -24,8 +24,10 @@ class HashQueue {
 private:
     unsigned long num_buckets;
     long bucket_size;
-    Node<T> **hash_queue_heads = (Node<T> **)calloc(DEFAULT_SIZE, sizeof(Node<T> *));
-    Node<T> **hash_queue_tails = (Node<T> **)calloc(DEFAULT_SIZE, sizeof(Node<T> *));
+  
+    Node<T> **hash_queue_heads = 0;
+    Node<T> **hash_queue_tails = 0;
+
     Node<T> *list_head;
     Node<T> *list_tail;
     size_t length;
@@ -171,8 +173,7 @@ bool HashQueue<T, Compare, Hash>::is_last_node() {
 
 template<class T, class Compare, class Hash>
 unsigned long int HashQueue<T, Compare, Hash>::get_bucket_index(const T element) {
-    std::hash<T> pdf;
-    size_t hash_value = pdf(element);
+    size_t hash_value = Hash()(element);
     return (hash_value % this->num_buckets);
 }
 
@@ -205,7 +206,7 @@ std::vector<T> HashQueue<T, Compare, Hash> :: get_all_elements(const T element, 
     return all_elements;
 };
 
-//TODO: Pointer memory allocation
+
 template<class T, class Compare, class Hash>
 HashQueue<T, Compare, Hash>::HashQueue(unsigned long num_buckets, long bucket_size) {
     this->bucket_size = bucket_size;
@@ -213,6 +214,8 @@ HashQueue<T, Compare, Hash>::HashQueue(unsigned long num_buckets, long bucket_si
     this->list_head = 0;
     this->list_tail = 0;
     this->length = 0;
+    this->hash_queue_heads = (Node<T> **)calloc(this->num_buckets, sizeof(Node<T> *));
+    this->hash_queue_tails = (Node<T> **)calloc(this->num_buckets, sizeof(Node<T> *));
 }
 
 template<class T, class Compare, class Hash>
@@ -296,7 +299,6 @@ bool HashQueue<T, Compare, Hash>::has_key(T element) {
 template<class T, class Compare, class Hash>
 std::vector<T> HashQueue<T,Compare, Hash>::get_all_elements(const T element) {
     size_t bucket_index = get_bucket_index(element);
-    std::cout<<bucket_index<<std::endl;
     return get_all_elements(element, bucket_index);
 }
 
