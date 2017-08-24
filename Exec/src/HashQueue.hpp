@@ -9,6 +9,8 @@
 #include "Node.hpp"
 #include "hashqueue_exceptions.hpp"
 
+#define DEFAULT_SIZE 128
+
 /*TODO:
  * 1. Catching Segmentation fault and throwing informative exception to the user.
  * 2. Performance optimization for get_all_elements* functions.
@@ -22,11 +24,11 @@ class HashQueue {
 private:
     unsigned long num_buckets;
     long bucket_size;
-    Node<T> *hash_queue_heads[100];
-    Node<T> *hash_queue_tails[100];
+    Node<T> **hash_queue_heads = (Node<T> **)calloc(DEFAULT_SIZE, sizeof(Node<T> *));
+    Node<T> **hash_queue_tails = (Node<T> **)calloc(DEFAULT_SIZE, sizeof(Node<T> *));
     Node<T> *list_head;
     Node<T> *list_tail;
-    unsigned long int length;
+    size_t length;
 
     Node<T> *create_node(const T element);
 
@@ -52,7 +54,7 @@ private:
 
 
 public:
-    HashQueue(unsigned long num_buckets = 100, long bucket_size = -1);
+    HashQueue(unsigned long num_buckets = DEFAULT_SIZE, long bucket_size = -1);
 
     void push(const T element);
 
@@ -104,7 +106,6 @@ void HashQueue<T, Compare, Hash>::push_to_list(Node<T> *&node) {
 template<class T, class Compare, class Hash>
 void HashQueue<T, Compare, Hash>::push_to_hash_queue(Node<T> *&node, size_t bucket_index) {
 
-    std::cout<<this->hash_queue_heads[bucket_index]<<std::endl;
     if (!node) {
         throw new InvalidPushException();
     }
@@ -194,9 +195,6 @@ template<class T, class Compare, class Hash>
 std::vector<T> HashQueue<T, Compare, Hash> :: get_all_elements(const T element, size_t bucket_index) {
 
     Node<T> *bucket_node = this->hash_queue_heads[bucket_index];
-    std::cout<<bucket_node<<std::endl;
-    std::cout<<bucket_node->data<<std::endl;
-    std::cout<<bucket_node->next_hash->data<<std::endl;
     std::vector<T> all_elements;
     while(bucket_node) {
         if (Compare()(bucket_node->data, element)) {
@@ -212,12 +210,6 @@ template<class T, class Compare, class Hash>
 HashQueue<T, Compare, Hash>::HashQueue(unsigned long num_buckets, long bucket_size) {
     this->bucket_size = bucket_size;
     this->num_buckets = num_buckets;
-    Node<T> *p[this->num_buckets];
-    for(int i = 0;i<this->num_buckets;i++) {
-        this->hash_queue_heads[i] = 0;
-        this->hash_queue_tails[i] = 0;
-    }
-
     this->list_head = 0;
     this->list_tail = 0;
     this->length = 0;
