@@ -16,18 +16,17 @@ int main() {
     hq.push(9.5);
 
     hq.display_list();
-    std::cout << hq.top() << std::endl;
-    std::cout << hq.get_count(3.5) << std::endl;
-    std::cout << hq.get_count(4.5) << std::endl;
+    std::cout << "Top of the Queue: "<<hq.top() << std::endl;
+    std::cout << "Occurrences of 3.5: " << hq.get_count(3.5) << std::endl;
+    std::cout << "Occurrences of 4.5: "<< hq.get_count(4.5) << std::endl;
+    std::cout << "Elements in the Queue: "<<std::endl;
     hq.display_list();
-    hq.pop();
-    hq.display_list();
-    while (!hq.is_empty()) {
-        hq.pop();
-    }
+    std::vector<double> v = hq.get_all_elements(3.5);
 
+    std::cout<<"Nodes whose data element is 3.5: "<<std::endl;
+    for(int i=0;i<v.size();i++)
+      std::cout<<v[i]<<std::endl;
 
-    hq.display_list();
 
 
     return 0;
