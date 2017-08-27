@@ -1,5 +1,8 @@
 
 #include <algorithm>
+#include <functional>
+#include <string>
+#include <vector>
 
 #include "../src/HashQueue.hpp"
 #include "gtest/gtest.h"
@@ -22,6 +25,27 @@ class PersonTest {
   }
 };
 
+class PersonHash {
+ public:
+  size_t operator()(PersonTest p1) {
+    std::hash<std::string> h;
+    return h(p1.get_first_name());
+  }
+};
+
+class Comparator {
+ public:
+  bool operator()(PersonTest p1, PersonTest p2) {
+    return (p1.get_first_name() == p2.get_first_name())
+        && (p1.get_last_name() == p2.get_last_name());
+  }
+
+};
+
+bool checkEquality(PersonTest p1, PersonTest p2) {
+  return (p1.get_first_name() == p2.get_first_name())
+      && (p1.get_last_name() == p2.get_last_name());
+}
 
 TEST(hashqueue, push_test) {
     double arr[] = {1.5,2.5,3.5,4.5,5.5,1.5,2.4,8.9,3.5,1.2};
@@ -96,16 +120,25 @@ TEST(hashqueue, hashqueue_get_all_elements_param__Test) {
     ASSERT_THAT(hq.get_all_elements(3.5), testing::ElementsAre(3.5,3.5));
 }
 
-/*TEST(hashqueue, get_all_elements_param__Test_Objects) {
+TEST(hashqueue, get_all_elements_param__Test_Objects) {
   PersonTest person1("Mickey", "Mouse");
   PersonTest person2("Donald", "Duck");
   PersonTest person3("Mickey", "Mouse");
 
-  HashQueue<PersonTest> hq;
+  HashQueue<PersonTest, Comparator, PersonHash> hq;
   hq.push(person1);
   hq.push(person2);
   hq.push(person3);
 
-  ASSERT_THAT(hq.get_all_elements(person1), testing::ElementsAre(person1,person3));
-}*/
+  EXPECT_EQ(hq.get_count(person1), 2);
+  std::vector<PersonTest> persons = hq.get_all_elements(person1);
+  std::vector<PersonTest> expected_persons;
+  expected_persons.push_back(person1);
+  expected_persons.push_back(person3);
+
+  for(int i=0;i<persons.size();i++) {
+    EXPECT_EQ(true, checkEquality(persons[i], expected_persons[i]));
+  }
+
+}
 

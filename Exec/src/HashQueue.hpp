@@ -24,7 +24,7 @@ class HashQueue {
 private:
     unsigned long num_buckets;
     long bucket_size;
-  
+
     Node<T> **hash_queue_heads = 0;
     Node<T> **hash_queue_tails = 0;
 
